@@ -1,0 +1,16 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Inertia\Inertia;
+
+class SettingController extends Controller
+{
+    public function index()
+    {
+        return Inertia::render('Settings/Index', [
+            // Pass any initial settings data here if needed
+        ]);
+    }
+}
