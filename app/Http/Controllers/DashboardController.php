@@ -34,6 +34,7 @@ class DashboardController extends Controller
         $totalPending = $bookingsToday->where('status', 'pending')->count();
 
         // 4. Live Car Status
+        $availableCarsCount = Car::where('status', 'available')->count();
         $cars = Car::with(['bookings' => function ($query) use ($today) {
             $query->whereDate('start_date', '<=', $today)
                   ->whereDate('end_date', '>=', $today)
@@ -92,6 +93,7 @@ class DashboardController extends Controller
                 ],
             ],
             'cars' => $cars,
+            'availableCarsCount' => $availableCarsCount,
             'earningSummary' => $earningSummary,
         ]);
     }

@@ -16,9 +16,16 @@ class FrontendController extends Controller
     {
         // Fetch featured cars (e.g., latest 3 available cars)
         $featuredCars = Car::where('status', 'available')
+            ->with('details')
             ->latest()
             ->take(3)
-            ->get();
+            ->get()
+            ->map(function ($car) {
+                // Transform details to be easily accessible
+                $details = $car->details->pluck('value', 'name')->toArray();
+                $car->features = $details;
+                return $car;
+            });
 
         return Inertia::render('Welcome', [
             'canLogin' => Route::has('login'),
@@ -41,7 +48,13 @@ class FrontendController extends Controller
             });
         }
 
-        $cars = $query->latest()->paginate(9)->withQueryString();
+        $cars = $query->latest()->with('details')->paginate(9)->withQueryString();
+        
+        $cars->getCollection()->transform(function ($car) {
+             $details = $car->details->pluck('value', 'name')->toArray();
+             $car->features = $details;
+             return $car;
+        });
 
         return Inertia::render('Frontend/Cars/Index', [
             'cars' => $cars,
@@ -54,9 +67,9 @@ class FrontendController extends Controller
         // Load details if relationship exists
         $car->load('details');
         
-        // Transform details like in CarController if needed, 
-        // or just pass them as is and handle in frontend.
-        // Let's pass them as is for now, Vue can iterate over car.details.
+        // Transform details to be easily accessible
+        $details = $car->details->pluck('value', 'name')->toArray();
+        $car->features = $details;
 
         return Inertia::render('Frontend/Cars/Show', [
             'car' => $car,

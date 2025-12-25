@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -31,10 +32,13 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('cars', CarController::class);
     
-    Route::resource('drivers', DriverController::class)->only(['index', 'create', 'store', 'edit', 'update']);
+    Route::resource('drivers', DriverController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
     
     Route::resource('bookings', BookingController::class)->only(['index', 'store', 'edit', 'update']);
     
+    Route::get('/bookings/{booking}/payment', [PaymentController::class, 'create'])->name('payment.create');
+    Route::post('/bookings/{booking}/payment', [PaymentController::class, 'store'])->name('payment.store');
+
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
     
     Route::get('/reports/payment-details', [ReportController::class, 'paymentDetails'])->name('reports.payment-details');

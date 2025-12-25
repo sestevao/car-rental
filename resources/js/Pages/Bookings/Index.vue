@@ -128,7 +128,7 @@ const formatCurrency = (amount) => {
                                     </span>
                                 </td>
                                 <td class="px-6 py-4 text-center">
-                                    <Link :href="route('bookings.edit', booking.id)" class="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300 font-medium text-xs">
+                                    <Link :href="route('bookings.edit', booking.id)" class="inline-flex items-center px-2 py-1 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                                         Edit
                                     </Link>
                                 </td>

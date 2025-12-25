@@ -15,6 +15,7 @@ A modern, full-featured car rental management platform built with **Laravel 11**
   - Automatic price calculation based on rental duration.
   - Login/Register prompt for unauthenticated users.
 - **My Bookings**: Customers can view their booking history and current status.
+- **Notifications System**: Real-time updates for booking status changes and confirmations.
 - **Responsive Design**: Fully optimized for mobile and desktop devices.
 - **Dark Mode**: Seamless support for light and dark themes.
 
@@ -81,7 +82,8 @@ A modern, full-featured car rental management platform built with **Laravel 11**
 
 ## 📸 Screenshots
 
-*(Add screenshots of the Dashboard, Car Catalog, and Booking page here)*
+![Dashboard Overview](dashboard%20-%20cover.png)
+![Frontend Overview](frontend%20-%20cover.png)
 
 ## 📄 License
 

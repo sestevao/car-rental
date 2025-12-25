@@ -1,6 +1,7 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
 import FrontendLayout from '@/Layouts/FrontendLayout.vue';
+import { BoltIcon, Cog6ToothIcon, UsersIcon } from '@heroicons/vue/24/outline';
 
 defineProps({
     canLogin: Boolean,
@@ -79,6 +80,20 @@ defineProps({
                                     <p class="mt-3 text-base text-gray-500 dark:text-gray-400">
                                         £{{ car.price_per_day }} / day
                                     </p>
+                                    <div class="flex flex-wrap gap-2 mt-3">
+                                        <span v-if="car.features && car.features.transmission" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
+                                            <Cog6ToothIcon class="w-3 h-3 mr-1" />
+                                            {{ car.features.transmission }}
+                                        </span>
+                                        <span v-if="car.features && car.features.seats" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
+                                            <UsersIcon class="w-3 h-3 mr-1" />
+                                            {{ car.features.seats }} Seats
+                                        </span>
+                                        <span v-if="car.features && car.features.fuel_type" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200">
+                                            <BoltIcon class="w-3 h-3 mr-1" />
+                                            {{ car.features.fuel_type }}
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="mt-6 flex items-center">

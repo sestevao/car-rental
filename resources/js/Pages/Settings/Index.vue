@@ -15,7 +15,7 @@ const tabs = [
 const generalSettings = ref({
     siteName: 'Car Rental',
     siteEmail: 'support@carrental.com',
-    currency: 'USD',
+    currency: 'GBP',
     timezone: 'UTC',
     language: 'English',
 });
@@ -78,9 +78,9 @@ const notificationSettings = ref({
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Currency</label>
                                     <select v-model="generalSettings.currency" class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-900 text-sm dark:text-gray-100 focus:ring-indigo-500 focus:border-indigo-500">
-                                        <option value="USD">USD ($)</option>
-                                        <option value="EUR">EUR (€)</option>
                                         <option value="GBP">GBP (£)</option>
+                                        <option value="EUR">EUR (€)</option>
+                                        <option value="USD">USD ($)</option>
                                     </select>
                                 </div>
                                 <div>

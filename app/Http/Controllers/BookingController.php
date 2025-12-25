@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Booking;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\Notifications\BookingStatusUpdated;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -87,7 +88,7 @@ class BookingController extends Controller
         
         $total_price = $days * $car->price_per_day;
 
-        Booking::create([
+        $booking = Booking::create([
             'user_id' => Auth::id(),
             'car_id' => $validated['car_id'],
             'start_date' => $validated['start_date'],
@@ -96,7 +97,7 @@ class BookingController extends Controller
             'total_price' => $total_price,
         ]);
 
-        return redirect()->route('my-bookings')->with('success', 'Booking created successfully!');
+        return redirect()->route('payment.create', $booking)->with('success', 'Booking created! Please complete payment.');
     }
 
     /**
@@ -113,7 +114,7 @@ class BookingController extends Controller
     public function edit(Booking $booking)
     {
         return Inertia::render('Bookings/Edit', [
-            'booking' => $booking->load(['user', 'car']),
+            'booking' => $booking->load(['user', 'car', 'transaction']),
             'cars' => \App\Models\Car::where('status', 'available')->orWhere('id', $booking->car_id)->get(),
         ]);
     }
@@ -141,6 +142,10 @@ class BookingController extends Controller
             'status' => $validated['status'],
             'total_price' => $total_price,
         ]);
+
+        if ($booking->wasChanged('status')) {
+            $booking->user->notify(new BookingStatusUpdated($booking));
+        }
 
         return redirect()->route('bookings.index')->with('success', 'Booking updated successfully.');
     }

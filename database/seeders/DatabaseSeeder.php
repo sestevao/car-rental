@@ -16,8 +16,9 @@ class DatabaseSeeder extends Seeder
     {
         // Create a specific test user
         $testUser = User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+            'name' => 'Admininstrator',
+            'email' => 'admin@example.com',
+            'password' => bcrypt('password'),
         ]);
 
         // Create random users
@@ -27,7 +28,11 @@ class DatabaseSeeder extends Seeder
         $users->push($testUser);
 
         // Create cars
-        $cars = Car::factory(20)->create();
+        $this->call(CarSeeder::class);
+        $cars = Car::all();
+
+        // Create drivers
+        $this->call(DriverSeeder::class);
 
         // Create bookings
         Booking::factory(30)->make()->each(function ($booking) use ($users, $cars) {

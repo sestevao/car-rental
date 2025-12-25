@@ -4,6 +4,7 @@ import FrontendLayout from '@/Layouts/FrontendLayout.vue';
 import Pagination from '@/Components/Pagination.vue';
 import { ref, watch } from 'vue';
 import debounce from 'lodash/debounce';
+import { Cog6ToothIcon, UsersIcon } from '@heroicons/vue/24/solid';
 
 const props = defineProps({
     cars: Object,
@@ -39,7 +40,7 @@ watch(search, debounce((value) => {
                     </div>
                 </div>
 
-                <div class="mt-10 grid gap-10 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="mt-10 grid gap-10 md:grid-cols-2 lg:grid-cols-3">
                     <div v-for="car in cars.data" :key="car.id" class="group relative flex flex-col overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
                         <div class="aspect-w-3 aspect-h-2 bg-gray-200 group-hover:opacity-75 sm:aspect-none sm:h-64">
                             <img :src="car.image_url || 'https://via.placeholder.com/400x300'" :alt="car.make + ' ' + car.model" class="h-full w-full object-cover object-center sm:h-full sm:w-full" />
@@ -60,11 +61,13 @@ watch(search, debounce((value) => {
                             
                             <!-- Badges/Features could go here -->
                             <div class="flex flex-wrap gap-2 mt-2">
-                                <span v-if="car.transmission" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
-                                    {{ car.transmission }}
+                                <span v-if="car.features && car.features.transmission" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
+                                    <Cog6ToothIcon class="w-3 h-3 mr-1" />
+                                    {{ car.features.transmission }}
                                 </span>
-                                <span v-if="car.seats" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
-                                    {{ car.seats }} Seats
+                                <span v-if="car.features && car.features.seats" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
+                                    <UsersIcon class="w-3 h-3 mr-1" />
+                                    {{ car.features.seats }} Seats
                                 </span>
                             </div>
 

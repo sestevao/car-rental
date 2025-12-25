@@ -69,19 +69,19 @@ const getIcon = (type) => {
                         class="p-4 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors flex gap-4"
                         :class="{ 'bg-indigo-50/50 dark:bg-indigo-900/10': !notification.read_at }">
                         
-                        <div class="w-10 h-10 rounded-full flex items-center justify-center shrink-0" :class="getIconColor(notification.type)">
-                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" v-html="getIcon(notification.type)"></svg>
+                        <div class="w-10 h-10 rounded-full flex items-center justify-center shrink-0" :class="getIconColor(notification.data.type)">
+                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" v-html="getIcon(notification.data.type)"></svg>
                         </div>
                         
                         <div class="flex-1 min-w-0">
                             <div class="flex justify-between items-start mb-1">
                                 <h3 class="text-sm font-semibold text-gray-900 dark:text-white truncate" :class="{ 'font-bold': !notification.read_at }">
-                                    {{ notification.title }}
+                                    {{ notification.data.title }}
                                 </h3>
                                 <span class="text-xs text-gray-500 whitespace-nowrap ml-2">{{ formatDate(notification.created_at) }}</span>
                             </div>
                             <p class="text-sm text-gray-600 dark:text-gray-300 line-clamp-2">
-                                {{ notification.message }}
+                                {{ notification.data.message }}
                             </p>
                         </div>
                         

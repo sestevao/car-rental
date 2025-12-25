@@ -2,6 +2,7 @@
 import { Head, Link, useForm, usePage } from '@inertiajs/vue3';
 import FrontendLayout from '@/Layouts/FrontendLayout.vue';
 import { computed } from 'vue';
+import { Cog6ToothIcon, UsersIcon, BriefcaseIcon, TruckIcon, MapPinIcon, ShieldCheckIcon, BoltIcon } from '@heroicons/vue/24/outline';
 
 const props = defineProps({
     car: Object,
@@ -43,7 +44,7 @@ const totalPrice = computed(() => {
 </script>
 
 <template>
-    <Head :title="`${car.make} ${car.model}`" />
+    <Head :title="`${car.make} ${car.model} - Car Rental`" />
 
     <FrontendLayout>
         <div class="bg-white dark:bg-gray-900 min-h-screen py-12">
@@ -70,9 +71,46 @@ const totalPrice = computed(() => {
                             <div class="text-base text-gray-700 dark:text-gray-300 space-y-6">
                                 <p>Year: {{ car.year }}</p>
                                 <p>Status: <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium capitalize" :class="car.status === 'available' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'">{{ car.status }}</span></p>
-                                <p v-if="car.transmission">Transmission: {{ car.transmission }}</p>
-                                <p v-if="car.seats">Seats: {{ car.seats }}</p>
-                                <!-- Add more details here if available -->
+                                
+                                <div v-if="car.features" class="grid grid-cols-1 gap-y-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+                                    <div v-if="car.features.transmission" class="flex items-center">
+                                        <Cog6ToothIcon class="h-5 w-5 text-gray-400 mr-2" />
+                                        <span class="font-medium text-gray-900 dark:text-gray-100 mr-2">Transmission:</span>
+                                        {{ car.features.transmission }}
+                                    </div>
+                                    <div v-if="car.features.fuel_type" class="flex items-center">
+                                        <BoltIcon class="h-5 w-5 text-gray-400 mr-2" />
+                                        <span class="font-medium text-gray-900 dark:text-gray-100 mr-2">Fuel Type:</span>
+                                        {{ car.features.fuel_type }}
+                                    </div>
+                                    <div v-if="car.features.seats" class="flex items-center">
+                                        <UsersIcon class="h-5 w-5 text-gray-400 mr-2" />
+                                        <span class="font-medium text-gray-900 dark:text-gray-100 mr-2">Seats:</span>
+                                        {{ car.features.seats }}
+                                    </div>
+                                    <div v-if="car.features.large_bags || car.features.small_bags" class="flex items-center">
+                                        <BriefcaseIcon class="h-5 w-5 text-gray-400 mr-2" />
+                                        <span class="font-medium text-gray-900 dark:text-gray-100 mr-2">Luggage:</span>
+                                        <span v-if="car.features.large_bags">{{ car.features.large_bags }} Large</span>
+                                        <span v-if="car.features.large_bags && car.features.small_bags">, </span>
+                                        <span v-if="car.features.small_bags">{{ car.features.small_bags }} Small</span>
+                                    </div>
+                                    <div v-if="car.features.mileage_policy" class="flex items-center">
+                                        <TruckIcon class="h-5 w-5 text-gray-400 mr-2" />
+                                        <span class="font-medium text-gray-900 dark:text-gray-100 mr-2">Mileage:</span>
+                                        {{ car.features.mileage_policy }}
+                                    </div>
+                                    <div v-if="car.features.location" class="flex items-center">
+                                        <MapPinIcon class="h-5 w-5 text-gray-400 mr-2" />
+                                        <span class="font-medium text-gray-900 dark:text-gray-100 mr-2">Location:</span>
+                                        {{ car.features.location }}
+                                    </div>
+                                    <div v-if="car.features.cancellation_policy" class="flex items-center">
+                                        <ShieldCheckIcon class="h-5 w-5 text-gray-400 mr-2" />
+                                        <span class="font-medium text-gray-900 dark:text-gray-100 mr-2">Cancellation:</span>
+                                        {{ car.features.cancellation_policy }}
+                                    </div>
+                                </div>
                             </div>
                         </div>
 

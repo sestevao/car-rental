@@ -152,7 +152,7 @@ const submit = () => {
                                         <InputLabel for="price_per_day" value="Price Per Day" />
                                         <div class="relative mt-1 rounded-md shadow-sm">
                                             <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                                <span class="text-gray-500 sm:text-sm">$</span>
+                                                <span class="text-gray-500 sm:text-sm">£</span>
                                             </div>
                                             <TextInput
                                                 id="price_per_day"
@@ -418,7 +418,7 @@ const submit = () => {
                                                 <td class="px-6 py-4">
                                                     <div class="text-sm text-gray-900 dark:text-gray-100">{{ booking.start_date }}</div>
                                                     <div class="text-xs text-gray-500">to {{ booking.end_date }}</div>
-                                                    <div class="text-xs font-medium text-indigo-600 mt-1">${{ booking.total_price }}</div>
+                                                    <div class="text-xs font-medium text-indigo-600 mt-1">£{{ booking.total_price }}</div>
                                                 </td>
                                                 <td class="px-6 py-4 text-right">
                                                     <span class="px-2.5 py-0.5 inline-flex text-xs font-medium rounded-full"

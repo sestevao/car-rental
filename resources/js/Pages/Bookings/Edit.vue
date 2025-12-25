@@ -53,7 +53,7 @@ const submit = () => {
                                 class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-900 dark:border-gray-700 dark:text-gray-300 text-sm"
                             >
                                 <option v-for="car in cars" :key="car.id" :value="car.id">
-                                    {{ car.make }} {{ car.model }} ({{ car.year }}) - ${{ car.daily_rate }}/day
+                                    {{ car.make }} {{ car.model }} ({{ car.year }}) - £{{ car.daily_rate }}/day
                                 </option>
                             </select>
                             <InputError class="mt-2" :message="form.errors.car_id" />
@@ -98,6 +98,37 @@ const submit = () => {
                                 <option value="cancelled">Cancelled</option>
                             </select>
                             <InputError class="mt-2" :message="form.errors.status" />
+                        </div>
+
+                        <div v-if="booking.transaction" class="border-t border-gray-200 dark:border-gray-700 pt-6 mt-6">
+                            <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4">Payment Information</h3>
+                            <dl class="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-6">
+                                <div>
+                                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Transaction ID</dt>
+                                    <dd class="mt-1 text-sm text-gray-900 dark:text-gray-100">{{ booking.transaction.transaction_id }}</dd>
+                                </div>
+                                <div>
+                                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Payment Method</dt>
+                                    <dd class="mt-1 text-sm text-gray-900 dark:text-gray-100 capitalize">{{ booking.transaction.payment_method }}</dd>
+                                </div>
+                                <div>
+                                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Amount</dt>
+                                    <dd class="mt-1 text-sm text-gray-900 dark:text-gray-100">£{{ booking.transaction.amount }}</dd>
+                                </div>
+                                <div>
+                                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Status</dt>
+                                    <dd class="mt-1 text-sm">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium capitalize" 
+                                            :class="booking.transaction.status === 'completed' ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'">
+                                            {{ booking.transaction.status }}
+                                        </span>
+                                    </dd>
+                                </div>
+                                <div>
+                                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Date</dt>
+                                    <dd class="mt-1 text-sm text-gray-900 dark:text-gray-100">{{ new Date(booking.transaction.created_at).toLocaleString() }}</dd>
+                                </div>
+                            </dl>
                         </div>
 
                         <div class="flex items-center gap-4 pt-4 border-t border-gray-100 dark:border-gray-700">

@@ -39,7 +39,7 @@ class CarController extends Controller
             'price_per_day' => 'required|numeric|min:0',
             'status' => 'required|in:available,rented,maintenance',
             'image_url' => 'nullable|string',
-            'image' => 'nullable|image|max:2048',
+            'image' => 'nullable|image|max:5120',
             // Details
             'seats' => 'nullable|integer|min:1',
             'transmission' => 'nullable|string|max:255',
@@ -114,7 +114,8 @@ class CarController extends Controller
             'price_per_day' => 'required|numeric|min:0',
             'status' => 'required|in:available,rented,maintenance',
             'image_url' => 'nullable|string',
-            'image' => 'nullable|image|max:2048',
+            'image' => 'nullable|image|max:5120', // 5MB max
+            // Details
             'seats' => 'nullable|integer|min:1',
             'transmission' => 'nullable|string|max:255',
             'large_bags' => 'nullable|integer|min:0',
