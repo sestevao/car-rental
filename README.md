@@ -67,7 +67,6 @@ A modern, full-featured car rental management platform built with **Laravel 11**
    ```bash
    php artisan migrate --seed
    ```
-   *This will create a test user: `test@example.com` (password: `password` by default for factories).*
 
 6. **Build Assets**
    ```bash
@@ -79,6 +78,13 @@ A modern, full-featured car rental management platform built with **Laravel 11**
    php artisan serve
    ```
    Visit `http://localhost:8000` in your browser.
+
+
+## 🔐 Default Credentials (Seeder)
+
+If you ran the seeder, you can log in with:
+- **Email**: `admin@example.com`
+- **Password**: `password`
 
 ## 📸 Screenshots
 
